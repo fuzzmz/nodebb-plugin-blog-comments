@@ -1,6 +1,6 @@
 (function() {
 	"use strict";
-
+	var token;
 	var articlePath = window.location.protocol + '//' + window.location.host + window.location.pathname;
 
 	var pluginURL = nodeBBURL + '/plugins/nodebb-plugin-blog-comments',
@@ -146,19 +146,22 @@
 				}
 			} else {
 				if (data.isAdmin) {
-					var token;
 					var loginXHR = newXHR();
 					loginXHR.open('POST', '/ghost/api/v0.1/authentication/token');
 					loginXHR.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-					loginXHR.send('grant_type=password&username=USERNAME&password=PASSWORD&client_id=ghost-admin')
+					loginXHR.send('grant_type=password&username=USER&password=PASSWORD&client_id=ghost-admin');
 
 					loginXHR.onload = function() {
 						var loginResponse = JSON.parse(loginXHR.responseText);
 						token = loginResponse['access_token'];
+						alert('Inside token is ' + token);
+						return token;
 					}
 
 					var adminXHR = newXHR();
+					// var auth_string = 'Bearer ' + token;
 					adminXHR.open('GET', '/ghost/api/v0.1/posts/' + articleID);
+					// adminXHR.setRequestHeader('Authorization', auth_string);
 					adminXHR.onload = function() {
 						if (adminXHR.status >= 200 && adminXHR.status < 400) {
 							var articleData = JSON.parse(adminXHR.responseText),
