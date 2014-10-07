@@ -154,6 +154,10 @@
 								markdown = articleData.markdown.split('\n\n').slice(0,2).join('\n\n') + '\n\n**Click [here]('+articlePath+') to see the full blog post**',
 								tagIDs = articleData.tags;
 
+								// run a get on '/ghost/api/v0.1/tags'
+								// for each tagID get the tags.$id.name
+								// assign all the tag names to the nodebb-content-tags variable
+
 							document.getElementById('nodebb-content-markdown').value = markdown;
 							document.getElementById('nodebb-content-title').value = articleData.title;
 						} else {
