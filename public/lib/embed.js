@@ -157,6 +157,9 @@
 								// run a get on '/ghost/api/v0.1/tags'
 								// for each tagID get the tags.$id.name
 								// assign all the tag names to the nodebb-content-tags variable
+								// optionally make sure to only take the first x tags as defined by Tags per Topic option
+								// optionally make sure to respect the minimum and maximum tag lenght
+								// if none of the optionals are met make sure not to crash the forum :D
 
 							document.getElementById('nodebb-content-markdown').value = markdown;
 							document.getElementById('nodebb-content-title').value = articleData.title;
